@@ -1,6 +1,6 @@
 # VettedComment
 
-This is ugly but it gets the point across
+This is ugly but it gets the point across (using ActiveSupport::TestCase outside of Rails)
 
 ## Installation
 
