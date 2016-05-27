@@ -23,6 +23,6 @@ class VettedComment
 
     res = HTTParty.post(sentiment_uri, :query => query, :headers => headers)
     
-    self.new(body: body, tone: JSON.parse(res.parsed_response)['type'])
+    self.new(body: body, tone: res['type'])
   end
 end

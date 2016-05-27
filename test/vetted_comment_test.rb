@@ -12,12 +12,12 @@ class VettedCommentTest < ActiveSupport::TestCase
     # stub positive result
     stub_request(:post, "http://mashape/test/endpoint?text=You%20are%20amazing%20at%20life!").
     with(:headers => {'Accept'=>'application/json', 'Content-Type'=>'application/json', 'X-Mashape-Key'=>'testkey'}).
-    to_return(:status => 200, :body => positive_result.to_json, :headers => {})
+    to_return(:status => 200, :body => positive_result.to_json, :headers => {'Content-Type'=>'application/json'})
 
     # stub negative result
     stub_request(:post, "http://mashape/test/endpoint?text=You%20suck%20at%20life!").
     with(:headers => {'Accept'=>'application/json', 'Content-Type'=>'application/json', 'X-Mashape-Key'=>'testkey'}).
-    to_return(:status => 200, :body => negative_result.to_json, :headers => {})
+    to_return(:status => 200, :body => negative_result.to_json, :headers => {'Content-Type'=>'application/json'})
   end
 
   test "vetting a positive comment" do
