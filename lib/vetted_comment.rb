@@ -12,7 +12,7 @@ class VettedComment
   def self.vet_comment(body)
     key = "testkey"
     sentiment_uri = "http://mashape/test/endpoint"
-    
+
     query = {'text' => body}
 
     headers = {}.tap do |h|
@@ -22,7 +22,7 @@ class VettedComment
     end
 
     res = HTTParty.post(sentiment_uri, :query => query, :headers => headers)
-    
+
     self.new(body: body, tone: res['type'])
   end
 end
