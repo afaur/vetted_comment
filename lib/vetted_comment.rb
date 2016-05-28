@@ -1,6 +1,8 @@
 require 'httparty'
 
 class VettedComment
+  VERSION = "0.0.1"
+
   include HTTParty
   attr_accessor :body, :tone
 
