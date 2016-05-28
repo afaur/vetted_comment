@@ -4,7 +4,7 @@ require 'webmock/minitest'
 WebMock.disable_net_connect!(allow_localhost: true)
 ActiveSupport.test_order = :random
 
-class VettedCommentTest < ActiveSupport::TestCase
+class CommentTest < ActiveSupport::TestCase
   setup do
     positive_result = {:type => "positive"}
     negative_result = {:type => "negative"}
@@ -20,15 +20,19 @@ class VettedCommentTest < ActiveSupport::TestCase
     to_return(:status => 200, :body => negative_result.to_json, :headers => {'Content-Type'=>'application/json'})
   end
 
-  test "vetting a positive comment" do
-    positive_result = VettedComment.vet_comment("You are amazing at life!")
-    assert_equal "You are amazing at life!", positive_result.body
-    assert_equal "positive", positive_result.tone
+  test "creating a positive comment" do
+    positive_comment = Comment.new(
+      body: "You are amazing at life!"
+    )
+    positive_comment.save
+    assert_equal "positive", positive_comment.tone
   end
 
-  test "vetting a negative result" do
-    negative_result = VettedComment.vet_comment("You suck at life!")
-    assert_equal "You suck at life!", negative_result.body
-    assert_equal "negative", negative_result.tone
+  test "creating a negative result" do
+    negative_comment = Comment.new(
+      body: "You suck at life!"
+    )
+    negative_comment.save
+    assert_equal "negative", negative_comment.tone
   end
 end
